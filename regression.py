@@ -117,11 +117,18 @@ def simpleSingleRegression(arr, X, Y):
     plotLine(X_true, Y_pred, Y, X, Y_true)
     return Y_pred
 def residuals(Y_true, Y_pred):
-    residuals = Y_true - Y_pred
-    print("Resid shape: ")
-    rss = np.mean(residuals ** 2)
-    print("Mean residual:", rss)
-    return residuals
+    R_simple = Y_true - Y_pred
+    mean_r_simple = np.mean( R_simple )
+    print("Mean residual:", mean_r_simple)
+
+    RSS_simple = np.sum(R_simple**2)
+    print("RSS:", RSS_simple)
+
+    mean_true = np.mean(Y_true)
+    SS_true = np.sum((Y_true - mean_true)**2)
+    RSq_simple = 1 - RSS_simple / SS_true
+    print("RSq:", RSq_simple)
+    return np.abs(R_simple)
 # Plots the data points and a line given an X matrix, a Y matrix and prediction
 def plotLine(X_true, Y_pred, Y, X, Y_true):
     # Visualization
