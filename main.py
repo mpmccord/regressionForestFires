@@ -80,6 +80,15 @@ def graphForestFiresMultiple():
     area = names[12]
     print(multiple_linear(fires, 8, 10, 12).summary())
     """
+def graphClimateChange():
+    fires = pd.read_csv("GlobalLandTemperaturesbyState.csv")
+    fires = fires.groupby(pd.Grouper(key='dt', freq='A')).mean().dropna()
+    fires = fires.to_numpy()
+    names = getLabels(getPath("GlobalLandTemperaturesbyState.csv"))
+    print(names)
+    area = names[12]
+    plotSimple(fires, names)
+    plotQuadratic(fires, names)
 def graphForestFires():
     fires = arr(getPath("forestfires.csv"))
     names = getLabels(getPath("forestfires.csv"))
@@ -88,7 +97,6 @@ def graphForestFires():
     # plotSimple(fires, names)
     plotQuadratic(fires, names)
 def main():
-    graphIris()
-    # graphForestFires()
+    graphClimateChange()
 if __name__ == '__main__':
     print(main())
